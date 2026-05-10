@@ -114,6 +114,15 @@ Add to your `claude_desktop_config.json`:
 
 ## Available Tools
 
+### `outlook_list_folders`
+List all mail folders in your Outlook mailbox.
+
+**Parameters:** None
+
+**Returns:** Array of folder objects with `id` and `displayName`
+
+---
+
 ### `outlook_list_emails`
 List recent emails from your mailbox.
 
@@ -166,6 +175,11 @@ Move an email to a different folder.
 
 **Returns:** Confirmation message
 
+**Note:** If `destinationFolder` is a folder name (not an ID), the server will:
+1. Look up the folder by name
+2. If not found, create a new folder with that name
+3. Move the email to the resolved folder ID
+
 ---
 
 ### `outlook_get_attachments`
@@ -188,6 +202,13 @@ Download attachment content (base64 encoded).
 **Returns:** Attachment object with base64 encoded content
 
 ---
+
+## Integration with Email Analytics Agent
+
+This server is designed to work with the [Email Analytics Agent](https://github.com/andrey-karasev/email-analytics-agent), which provides:
+- Intelligent email grouping by sender domain
+- Interactive folder assignment
+- Rule learning for automatic email organization
 
 ## Development
 
