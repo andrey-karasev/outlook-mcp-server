@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "outlook": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "env": {
+        "OUTLOOK_CLIENT_ID": "${OUTLOOK_CLIENT_ID}",
+        "OUTLOOK_CLIENT_SECRET": "${OUTLOOK_CLIENT_SECRET}",
+        "OUTLOOK_TENANT_ID": "common",
+        "OUTLOOK_REFRESH_TOKEN": "${OUTLOOK_REFRESH_TOKEN}",
+        "OUTLOOK_MAILBOX": "inbox",
+        "OUTLOOK_BATCH_SIZE": "20"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "outlook-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Outlook.com email read/delete/mark operations via Microsoft Graph API",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": [
+    "mcp",
+    "outlook",
+    "microsoft-graph",
+    "email"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@azure/identity": "^4.3.0",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@modelcontextprotocol/sdk": "^1.18.0",
+    "dotenv": "^17.4.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
