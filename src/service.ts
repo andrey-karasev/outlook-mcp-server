@@ -33,6 +33,10 @@ export class OutlookService {
     return this.graphClient.moveEmail(id, destinationFolder);
   }
 
+  listFolders(): Promise<{ id: string; displayName: string }[]> {
+    return this.graphClient.listFolders();
+  }
+
   getAttachments(messageId: string): Promise<AttachmentSummary[]> {
     return this.graphClient.getAttachments(messageId);
   }

@@ -6,6 +6,7 @@ export interface EmailClient {
   deleteEmail(id: string): Promise<void>;
   markAsRead(id: string, isRead: boolean): Promise<void>;
   moveEmail(id: string, destinationFolder: string): Promise<void>;
+  listFolders(): Promise<{ id: string; displayName: string }[]>;
   getAttachments(id: string): Promise<AttachmentSummary[]>;
   getAttachmentContent(messageId: string, attachmentId: string): Promise<EmailAttachment>;
 }

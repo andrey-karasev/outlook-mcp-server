@@ -118,6 +118,19 @@ server.tool(
   }
 );
 
+// List mail folders
+server.tool(
+  "outlook_list_folders",
+  "List all mail folders in the mailbox",
+  {},
+  async () => {
+    const folders = await service.listFolders();
+    return {
+      content: [{ type: "text", text: JSON.stringify(folders, null, 2) }]
+    };
+  }
+);
+
 // Get email attachments
 server.tool(
   "outlook_get_attachments",

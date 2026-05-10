@@ -132,13 +132,39 @@ export class GraphEmailClient implements EmailClient {
     }
   }
 
+  async listFolders(): Promise<{ id: string; displayName: string }[]> {
+    try {
+      const result = await this.graphClient
+        .api("/me/mailFolders")
+        .select("id,displayName")
+        .top(50)
+        .get();
+      return result.value.map((f: any) => ({ id: f.id, displayName: f.displayName }));
+    } catch (error) {
+      throw new Error(`Failed to list folders: ${error}`);
+    }
+  }
+
   async moveEmail(id: string, destinationFolder: string): Promise<void> {
     try {
-      await this.graphClient
-        .api(`/me/messages/${id}/move`)
-        .post({
-          destinationId: destinationFolder
-        });
+      // Resolve folder name to ID if not already an ID
+      let folderId = destinationFolder;
+      if (!destinationFolder.match(/^[A-Za-z0-9_=-]{20,}$/)) {
+        const folders = await this.listFolders();
+        const match = folders.find(
+          (f) => f.displayName.toLowerCase() === destinationFolder.toLowerCase()
+        );
+        if (match) {
+          folderId = match.id;
+        } else {
+          // Create the folder
+          const created = await this.graphClient
+            .api("/me/mailFolders")
+            .post({ displayName: destinationFolder });
+          folderId = created.id;
+        }
+      }
+      await this.graphClient.api(`/me/messages/${id}/move`).post({ destinationId: folderId });
     } catch (error) {
       throw new Error(`Failed to move email ${id}: ${error}`);
     }
