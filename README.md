@@ -67,31 +67,15 @@ node scripts/get-auth-token.js
 
 Or use the Microsoft Graph explorer at https://developer.microsoft.com/en-us/graph/graph-explorer
 
-### 6. Install & Configure
+### 6. Install
 
 ```bash
-cd outlook-mcp-server
-npm install
+npx -y @web4w3/install outlook
 ```
 
-Create `.env` file:
+No cloning or build step needed. The package is pre-compiled and available on npm as [`@web4w3/install`](https://www.npmjs.com/package/@web4w3/install).
 
-```env
-OUTLOOK_CLIENT_ID=your_client_id_here
-OUTLOOK_CLIENT_SECRET=your_client_secret_here
-OUTLOOK_TENANT_ID=common
-OUTLOOK_REFRESH_TOKEN=your_refresh_token_here
-OUTLOOK_MAILBOX=inbox
-OUTLOOK_BATCH_SIZE=20
-```
-
-### 7. Build
-
-```bash
-npm run build
-```
-
-### 8. Configure in Claude Desktop
+### 7. Configure in Claude Desktop
 
 Add to your `claude_desktop_config.json`:
 
@@ -99,8 +83,8 @@ Add to your `claude_desktop_config.json`:
 {
   "mcpServers": {
     "outlook": {
-      "command": "node",
-      "args": ["/path/to/outlook-mcp-server/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "@web4w3/install", "outlook"],
       "env": {
         "OUTLOOK_CLIENT_ID": "your_client_id",
         "OUTLOOK_CLIENT_SECRET": "your_client_secret",
